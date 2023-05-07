@@ -1,22 +1,17 @@
 class Solution:
-    def findDuplicate(self, nums: List[int]) -> int:
-        
-        slow, fast = 0, 0
-        
+    def findDuplicate(self, nums):
+        # Find the intersection point of the two runners.
+        tortoise = hare = nums[0]
         while True:
-            slow = nums[slow]
-            fast = nums[nums[fast]]
-            
-            if slow == fast:
+            tortoise = nums[tortoise]
+            hare = nums[nums[hare]]
+            if tortoise == hare:
                 break
-                
-                
-        slow2 = 0
         
-        while True:
-            slow = nums[slow]
-            slow2 = nums[slow2]
-            
-            if slow == slow2:
-                return slow
-            
+        # Find the "entrance" to the cycle.
+        tortoise = nums[0]
+        while tortoise != hare:
+            tortoise = nums[tortoise]
+            hare = nums[hare]
+        
+        return hare
